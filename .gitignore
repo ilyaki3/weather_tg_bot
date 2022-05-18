@@ -1,5 +1,5 @@
 venv
 .idea
 config.py
-_pycache_
+__pycache__
 city_name_parse.py
