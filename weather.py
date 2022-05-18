@@ -1,12 +1,7 @@
-from config import API_TOKEN
 import requests
 
 
-# api.openweathermap.org/data/2.5/forecast?q={city name}&appid={API key}
-
-
-def get_today_weather(location, period, API_TOKEN):
-    # part = 'current, minutely, hourly, alerts'
+def get_weather(location, period, API_TOKEN):
     cnt = 40
     try:
 
@@ -14,7 +9,6 @@ def get_today_weather(location, period, API_TOKEN):
                          f'lat={location["latitude"]}&lon={location["longitude"]}'
                          f'&cnt={cnt}&appid={API_TOKEN}&units=metric&lang=ru')
         data = r.json()
-        # pprint(data)
         if period == '/Сегодня':
             weather = {
                 'city': data['city']['name'],
@@ -28,7 +22,6 @@ def get_today_weather(location, period, API_TOKEN):
                      f"{weather['weather']}\n"\
                      f"Температура днем {weather['temp_max']} C\n" \
                      f"Температура ночью {weather['temp_min']} C"
-            # pprint(result)
             return result
 
         elif period == '/Завтра':
@@ -44,10 +37,8 @@ def get_today_weather(location, period, API_TOKEN):
                      f"{weather['weather']}\n" \
                      f"Температура днем {weather['temp_max']} C\n" \
                      f"Температура ночью {weather['temp_min']} C"
-            # pprint(result)
             return result
 
     except Exception as ex:
         print(ex)
 
-# get_today_weather(location, API_TOKEN)

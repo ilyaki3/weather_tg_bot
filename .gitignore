@@ -2,3 +2,4 @@ venv
 .idea
 config.py
 _pycache_
+city_name_parse.py
