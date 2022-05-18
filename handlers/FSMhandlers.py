@@ -35,7 +35,16 @@ async def set_period(message: types.Message, state: FSMContext):
     await state.finish()
 
 
+async def cancel_handler(message: types.Message, state: FSMContext):
+    current_state = await state.get_state()
+    if current_state is None:
+        return
+    await state.finish()
+    await bot.send_message(message.from_user.id, 'Отменено', reply_markup=kb.start_keyboard)
+
+
 def register_handlers(dp: Dispatcher):
-    dp.register_message_handler(start_command, commands=['start', 'Начать_заново'], state=None)
+    dp.register_message_handler(start_command, commands=['start'], state=None)
     dp.register_message_handler(set_location, content_types=['location'], state=FsmHandlers.location)
     dp.register_message_handler(set_period, commands=['Сегодня', 'Завтра'], state=FsmHandlers.period)
+    dp.register_message_handler(cancel_handler, state='*', commands='Отмена')

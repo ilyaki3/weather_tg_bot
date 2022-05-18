@@ -9,7 +9,7 @@ location_keyboard.add(KeyboardButton('Моя геолокация', request_loca
 period_keyboard = ReplyKeyboardMarkup(resize_keyboard=True, one_time_keyboard=False)
 period_buttons = ['/Сегодня', '/Завтра']
 period_keyboard.row(*period_buttons)
-period_keyboard.row('/start')
+period_keyboard.row('/Отмена')
 
 # В начало
 start_keyboard = ReplyKeyboardMarkup(resize_keyboard=True, one_time_keyboard=True)
